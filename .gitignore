@@ -9,7 +9,14 @@ src/solution/*
 /dataSources/
 /dataSources.local.xml
 out/
+build/
 codingtest.iml
 .idea/
 .DS_Store*
 *.properties
+
+
+# gradle  
+.gradle
+**/build/
+!src/**/build/
