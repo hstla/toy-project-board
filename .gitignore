@@ -15,8 +15,12 @@ codingtest.iml
 .DS_Store*
 *.properties
 
-
 # gradle  
 .gradle
 **/build/
 !src/**/build/
+gradle/
+gradlew.bat
+gradlew
+settings.gradle
+build.gradle
