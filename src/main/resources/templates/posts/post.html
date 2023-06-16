@@ -23,12 +23,12 @@
 <div class="d-grid gap-2 d-md-flex justify-content-md-end container">
     <button type="button" class="btn btn-primary  btn-lg"
             onclick="location.href='editPost.html'"
-            th:onclick="|location.href='@{/posts/edit/}| + ${post.id} + |'|">수정
+            th:onclick="|location.href='@{/posts/edit/{id}(id=${post.id})}'|">수정
     </button>
     <button type="button" class="btn btn-danger btn-lg"
             onclick="location.href='posts.html'"
             th:method="post"
-            th:onclick="|location.href='@{/posts/delete/}| + ${post.id} + |'|">삭제
+            th:onclick="|location.href='@{/posts/delete/{id}(id=${post.id})}'|">삭제
     </button>
 
 </div>

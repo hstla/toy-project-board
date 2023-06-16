@@ -38,7 +38,7 @@
     <tbody>
     <tr th:each="post : ${posts}" style="cursor: pointer"
         onclick="location.href='post.html'"
-        th:onclick="|location.href='@{/posts/}| + ${post.id} + |'|">
+        th:onclick="|location.href='@{/posts/{id}(id=${post.id})}'|">
         <td th:text="${post.getWriter()}">작성자</td>
         <td th:text="${post.getTitle()}">제목</td>
         <td th:text="${post.getViewCount()}">조회수</td>
