@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import toyproject.board.domain.post.MapPostRepository;
 import toyproject.board.domain.post.Post;
 import toyproject.board.web.Post.form.PostSaveForm;
@@ -62,14 +63,16 @@ public class postController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editPost(@PathVariable Long id, @Validated @ModelAttribute("post") PostUpdateForm form, BindingResult bindingResult) {
+    public String editPost(@PathVariable Long id, @Validated @ModelAttribute("post") PostUpdateForm form,
+                           BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             return "posts/editPost";
         }
         Post post = new Post(form.getWriter(), form.getTitle(), form.getContent());
         mapPostRepository.update(id, post);
-        return "posts/post";
+        redirectAttributes.addAttribute("id", id);
+        return "redirect:/posts/{id}";
     }
 
     @GetMapping("/delete/{id}")
