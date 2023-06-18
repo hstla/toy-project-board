@@ -1,4 +1,4 @@
-package toyproject.board.web.Post.form;
+package toyproject.board.web.post.form;
 
 import lombok.Data;
 import javax.validation.constraints.NotBlank;

@@ -1,8 +1,8 @@
-package toyproject.board.web.Post;
+package toyproject.board.web.post;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import toyproject.board.domain.post.MapPostRepository;
 import toyproject.board.domain.post.Post;
-import toyproject.board.web.Post.form.PostSaveForm;
-import toyproject.board.web.Post.form.PostUpdateForm;
+import toyproject.board.web.post.form.PostSaveForm;
+import toyproject.board.web.post.form.PostUpdateForm;
 
 import java.util.List;
 
 @Slf4j
-@Controller
+//@Controller
+@Component
 @RequestMapping("/posts")
 @RequiredArgsConstructor
 public class postController {
