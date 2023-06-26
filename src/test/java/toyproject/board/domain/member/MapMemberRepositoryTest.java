@@ -2,6 +2,7 @@ package toyproject.board.domain.member;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,27 +13,32 @@ import static org.assertj.core.api.Assertions.*;
 class MapMemberRepositoryTest {
 
     MapMemberRepository mapMemberRepository = new MapMemberRepository();
+    static Member member1;
+    static Member member2;
 
     @AfterEach
     void clearStore() {
         mapMemberRepository.clearStore();
     }
 
-    @Test
-    void save() {
-        //given
-        Member member1 = Member.builder()
-                .email("ree@gnak.com")
+    @BeforeEach
+    void firstSave() {
+        member1 = Member.builder()
+                .email("test1@gmail.com")
                 .password("1234")
                 .writer("writer1")
                 .build();
 
-        Member member2 = Member.builder()
-                .email("ree@gnak1.com")
+        member2 = Member.builder()
+                .email("test2@gmail.com")
                 .password("1234")
                 .writer("writer2")
                 .build();
+    }
 
+
+    @Test
+    void save() {
         //when
         Member saveMember1 = mapMemberRepository.save(member1);
         Member saveMember2 = mapMemberRepository.save(member2);
@@ -47,11 +53,6 @@ class MapMemberRepositoryTest {
     @Test
     void findById() {
         //given
-        Member member1 = Member.builder()
-                .email("ree@gnak.com")
-                .password("1234")
-                .writer("writer1")
-                .build();
         Member saveMember = mapMemberRepository.save(member1);
         //when
         Member findMember = mapMemberRepository.findById(saveMember.getId());
@@ -64,18 +65,6 @@ class MapMemberRepositoryTest {
     @Test
     void findAll() {
         //given
-        Member member1 = Member.builder()
-                .email("ree@gnak.com")
-                .password("1234")
-                .writer("writer1")
-                .build();
-
-        Member member2 = Member.builder()
-                .email("ree@gnak1.com")
-                .password("1234")
-                .writer("writer2")
-                .build();
-
         mapMemberRepository.save(member1);
         mapMemberRepository.save(member2);
         //when
@@ -87,12 +76,7 @@ class MapMemberRepositoryTest {
     @Test
     void updateMember() {
         //given
-        Member member = Member.builder()
-                .email("ree@gnak.com")
-                .password("1234")
-                .writer("writer1")
-                .build();
-        Member saveMember = mapMemberRepository.save(member);
+        Member saveMember = mapMemberRepository.save(member1);
         //when
         Member updateMember = Member.builder()
                 .writer("updateWriter")
@@ -111,18 +95,6 @@ class MapMemberRepositoryTest {
     @Test
     void deleteMember() {
         //given
-        Member member1 = Member.builder()
-                .email("ree@gnak.com")
-                .password("1234")
-                .writer("writer1")
-                .build();
-
-        Member member2 = Member.builder()
-                .email("ree@gnak1.com")
-                .password("1234")
-                .writer("writer2")
-                .build();
-
         Member saveMember1 = mapMemberRepository.save(member1);
         mapMemberRepository.save(member2);
         //when
@@ -135,12 +107,6 @@ class MapMemberRepositoryTest {
     @Test
     void clearStore1() {
         //given
-        Member member1 = Member.builder()
-                .email("ree@gnak.com")
-                .password("1234")
-                .writer("writer1")
-                .build();
-
         mapMemberRepository.save(member1);
         //when
         mapMemberRepository.clearStore();
@@ -152,24 +118,12 @@ class MapMemberRepositoryTest {
     @Test
     void findByEmail() {
         //given
-        Member member1 = Member.builder()
-                .email("test@gmail.com")
-                .password("1234")
-                .writer("writer1")
-                .build();
-
-        Member member2 = Member.builder()
-                .email("test@gmail1.com")
-                .password("1234")
-                .writer("writer2")
-                .build();
-
         mapMemberRepository.save(member1);
         mapMemberRepository.save(member2);
         //when
-        Member findEmailMember = mapMemberRepository.findByEmail("test@gmail1.com").orElse(null);
+        Member findEmailMember = mapMemberRepository.findByEmail("test1@gmail.com").orElse(null);
         //then
-        assertThat(findEmailMember.getEmail()).isEqualTo("test@gmail1.com");
-        log.info("findEmailMember.getEmail={}",findEmailMember.getId());
+        assertThat(findEmailMember.getEmail()).isEqualTo("test1@gmail.com");
+        log.info("findEmailMember.getEmail={}", findEmailMember.getId());
     }
 }
